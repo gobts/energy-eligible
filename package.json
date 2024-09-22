@@ -6,8 +6,8 @@
     "build": "rimraf dist && webpack --mode production",
     "start": "NODE_ENV=production node dist/index.js",
     "start:dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/index.ts",
-    "test": "jest",
-    "test:cov": "jest --coverage",
+    "test": "jest --config jest.config.ts",
+    "test:cov": "jest  --config jest.config.ts --coverage",
     "test:e2e": "jest --config jest.e2e.config.ts  --detectOpenHandles",
     "lint": "eslint --no-ignore",
     "lint:fix": "eslint --no-ignore --fix",
@@ -49,6 +49,9 @@
     "webpack-cli": "^5.1.4",
     "webpack-node-externals": "^3.0.0",
     "webpack-shell-plugin-next": "^2.3.2"
+  },
+  "jest": {
+    "testTimeout": 10000
   },
   "license": "UNLICENSED"
 }

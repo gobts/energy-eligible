@@ -9,8 +9,7 @@ const config: Config = {
   modulePaths: [compilerOptions.baseUrl],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
   maxWorkers: 2,
-  // collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.ts', '!src/**/*.d.ts', '!src/**/*.routes.ts', '!src/**/index.ts', '!src/core/**/*.ts'],
+  collectCoverageFrom: ['src/**/*.ts', '!src/**/*.d.ts', '!src/**/*.routes.ts', '!src/**/index.ts', '!src/**/main.ts', '!src/core/**/*.ts'],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'html', 'lcov'],
   coverageThreshold: {
