@@ -4,8 +4,6 @@ const tsPlugin = require('@typescript-eslint/eslint-plugin')
 const prettierPlugin = require('eslint-plugin-prettier')
 const prettierConfig = require('eslint-config-prettier')
 
-// const compat = new FlatCompat()
-
 module.export = [
   {
     ignores: ['node_modules/**', 'dist/**'],
