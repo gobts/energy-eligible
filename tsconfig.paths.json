@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@application/*": ["src/application/*"],
+      "@domain/*": ["src/domain/*"],
+      "@error/*": ["src/errors/*"],
+      "@infrastructure/*": ["src/infrastructure/*"],
+      "@core/*": ["src/core/*"],
+      "@dto/*": ["src/DTO/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@utils/*": ["src/utils/*"],
+      "@constants/*": ["src/constants/*"]
+    }
+  }
+}

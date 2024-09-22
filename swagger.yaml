@@ -1,0 +1,93 @@
+openapi: 3.0.3
+info:
+  title: Eligibility API
+  description: API para verificar a elegibilidade de um cliente.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+    description: Servidor local
+
+paths:
+  /api/eligibility:
+    post:
+      summary: Verificar a elegibilidade do cliente
+      tags:
+        - Elegibilidade do cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - numeroDoDocumento
+                - tipoDeConexao
+                - classeDeConsumo
+                - modalidadeTarifaria
+                - historicoDeConsumo
+              properties:
+                numeroDoDocumento:
+                  type: string
+                  example: "14041737706"
+                  description: Número do documento do cliente.
+                tipoDeConexao:
+                  type: string
+                  enum: [monofasico, bifasico, trifasico]
+                  example: bifasico
+                  description: Tipo de conexão do cliente.
+                classeDeConsumo:
+                  type: string
+                  enum: [residencial, comercial, industrial]
+                  example: comercial
+                  description: Classe de consumo do cliente.
+                modalidadeTarifaria:
+                  type: string
+                  enum: [convencional, branca]
+                  example: convencional
+                  description: Modalidade tarifária do cliente.
+                historicoDeConsumo:
+                  type: array
+                  items:
+                    type: integer
+                  example: [3878, 9760, 5976, 2797, 2481, 5731, 7538, 4392, 7859, 4160, 6941, 4597]
+                  description: Histórico de consumo do cliente, em kWh nos últimos 12 meses.
+      responses:
+        '200':
+          description: O cliente é elegível.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  elegivel:
+                    type: boolean
+                    example: true
+                  economiaAnualDeCO2:
+                    type: number
+                    format: float
+                    example: 4584.04
+                    description: Economia anual de CO2 Kg.
+        '400':
+          description: O cliente não é elegível ou erro de validação do schema.
+          content:
+            application/json:
+              schema:
+                type: object
+                oneOf:
+                  - description: Erro de inelegibilidade
+                    properties:
+                      elegivel:
+                        type: boolean
+                        example: false
+                      razoesDeInelegibilidade:
+                        type: array
+                        items:
+                          type: string
+                        example: ["Modalidade tarifária não aceita"]
+                  - description: Erro de validação do schema
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                        example: ["Modalidade de Tarifa invalida"]
